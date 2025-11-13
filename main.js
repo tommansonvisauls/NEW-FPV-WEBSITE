@@ -30,3 +30,15 @@ document.querySelectorAll('.tile video').forEach(v=>{
     v.currentTime = 0;
   });
 });
+document.querySelectorAll(".vimeo-tile").forEach(tile => {
+  const iframe = tile.querySelector(".preview");
+  const vimeoURL = tile.dataset.vimeo + "?autoplay=1&muted=1&loop=1";
+
+  tile.addEventListener("mouseenter", () => {
+    iframe.src = vimeoURL;
+  });
+
+  tile.addEventListener("mouseleave", () => {
+    iframe.src = "";
+  });
+});
