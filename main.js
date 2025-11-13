@@ -30,15 +30,35 @@ document.querySelectorAll('.tile video').forEach(v=>{
     v.currentTime = 0;
   });
 });
+// Vimeo hover previews
 document.querySelectorAll(".vimeo-tile").forEach(tile => {
   const iframe = tile.querySelector(".preview");
-  const vimeoURL = tile.dataset.vimeo + "?autoplay=1&muted=1&loop=1";
+  const base = tile.dataset.vimeo;
 
-  tile.addEventListener("mouseenter", () => {
-    iframe.src = vimeoURL;
-  });
+  if (!iframe || !base) return;
 
-  tile.addEventListener("mouseleave", () => {
-    iframe.src = "";
-  });
+  // Add background mode + autoplay/muted/loop to keep Vimeo happy
+  const vimeoURL =
+    base + "?background=1&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0";
+
+  const startPreview = () => {
+    // Only set if not already set (avoids reloading every tiny mouse move)
+    if (iframe.src !== vimeoURL) {
+      iframe.src = vimeoURL;
+    }
+  };
+
+  const stopPreview = () => {
+    // Unload iframe so it stops playing + frees resources
+    if (iframe.src) {
+      iframe.src = "about:blank";
+    }
+  };
+
+  // Mouse + keyboard
+  tile.addEventListener("mouseenter", startPreview);
+  tile.addEventListener("mouseleave", stopPreview);
+  tile.addEventListener("focusin", startPreview);
+  tile.addEventListener("focusout", stopPreview);
 });
+
