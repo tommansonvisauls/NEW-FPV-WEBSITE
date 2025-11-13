@@ -401,3 +401,26 @@ footer{
   .nav-links{display:none}
   .hero-actions{flex-direction:column}
 }
+.vimeo-tile {
+  position: relative;
+  overflow: hidden;
+}
+
+.vimeo-tile .thumb,
+.vimeo-tile .preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: inherit;
+}
+
+.vimeo-tile .preview {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.vimeo-tile:hover .preview {
+  opacity: 1;
+}
