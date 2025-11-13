@@ -401,26 +401,33 @@ footer{
   .nav-links{display:none}
   .hero-actions{flex-direction:column}
 }
-.vimeo-tile {
+..vimeo-tile {
   position: relative;
   overflow: hidden;
 }
 
+/* Thumbnail and iframe fill the tile */
 .vimeo-tile .thumb,
 .vimeo-tile .preview {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   border-radius: inherit;
+  display: block;
 }
 
+/* Iframe starts hidden */
 .vimeo-tile .preview {
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s ease;
 }
-.vimeo-tile:hover .preview {
+
+/* On hover, fade iframe in */
+.vimeo-tile:hover .preview,
+.vimeo-tile:focus-within .preview {
   opacity: 1;
 }
